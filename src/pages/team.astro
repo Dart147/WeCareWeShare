@@ -1,0 +1,427 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Team member data
+interface TeamMember {
+  name: string;
+  school: string;
+  image: string;
+  bio: string;
+}
+
+// 建功小隊 members
+const jiangongTeam: TeamMember[] = [
+  {
+    name: '許宸豪',
+    school: '國立清華大學<br>清華學院學士班',
+    image: '/images/team/people/team-img5.jpg',
+    bio: '想走體制內教育，卻以一條體制外的路培養自己。目前是清大不分系的學生，興趣為地方創生及教育。努力地結合兩者，串聯資源，點亮台灣各個鄉鎮的美。希望透過We Care We Share交流多元文化，使國際學生認識台灣，使小學生認識世界。',
+  },
+  {
+    name: '林昀蓁',
+    school: '國立清華大學<br>幼兒教育學系',
+    image: '/images/team/people/team-img3.jpg',
+    bio: '過去接觸教育的經驗中，面對不同年齡的孩子，總能從他們身上看到自己過去成長的一些痕跡，也時常從他們的學習現況中看到想要改變的地方，因此抱持著「挑戰自己對於和孩子互動有多少熱忱」的心態參與這個計畫。幾個月過後的今天，雖然不確定英文、Podcast等這些東西給孩子們帶來的改變是什麼，但藉由語言、文化又或者彼此的情緒共鳴，從聆聽到表達，再從表達到聆聽，創造彼此生活中安心、舒服的一小段時光，一起朝著自己的路前進……。很高興能夠和不同特色的夥伴合作，成為孩子們童年點滴中的一部份!',
+  },
+];
+
+// 舊社小隊 members
+const jiusheTeam: TeamMember[] = [
+  {
+    name: '邱維均',
+    school: '國立清華大學<br>外國語文學系',
+    image: '/images/team/people/team-img2.jpg',
+    bio: '目前為外文系與小教師培生，對於語言學習的熱情使我與We Care, We Share連結，進而讓我有機會進到國小教學現場，真正接觸到每個小小靈魂。努力在體制內做出教育創新，鼓勵孩子勇於嘗試，將雙語教育融入日常，陪伴孩子快樂學習。',
+  },
+  {
+    name: '賴郁婷',
+    school: '國立清華大學<br>跨院國際博士班',
+    image: '/images/team/people/team-img4.jpg',
+    bio: '《幫助孩子找到學習的熱情，陪伴他們一起成長》在教學現場，常常遇到孩子們缺乏學習動機的問題。當他們無法理解學習的目的時，難以體會學習的樂趣，自然無法期待學習帶來的成就感與改變。教學內容如果無法引起孩子的共鳴，他們便無法產生興趣，學習因而容易侷限在課堂內，缺乏自主性與永續性。身為一名致力於翻轉教學的教育工作者，加入We Care We Share 團隊正是我對此議題的回應。希望透過貼近生活的方式，帶領孩子錄製英語podcast，讓他們有機會把英語從課堂與考試的框架中解放出來，延伸到真實生活的應用中。',
+  },
+];
+
+// Milestones data
+interface Milestone {
+  date: string; // Format: YYYY-MM
+  events: string[];
+}
+
+const milestones: Milestone[] = [  
+{
+    date: '2023-09',
+    events: [
+      '與建功國小開啟合作',
+      '獲第一屆清華IDEAL永續校園實踐專案優選',
+      '擴展合作學校範圍',
+      '累積發行超過20集Podcast',
+    ],
+  },
+  {
+    date: '2024-02',
+    events: [
+        '申請清華大學通識中心自主學習課程',
+        '與建功國小志工社團—豔紫荊志工社合作',
+        '參與2024清華永續學生聯展',
+        '獲113年度清華大學社會責任實踐基地（USR-Hub）計畫補助',
+        '入選第三屆清華校園永續生活創新實驗室（CLL）',
+        '通過服務學習新課程申請'
+    ],
+  },
+  {
+    date: '2024-09',
+    events: [
+      '獲教學創新研究計畫補助',
+      '與舊社國小開啟合作',
+    ],
+  },
+];
+---
+
+<Layout title="團隊介紹 | 童心・同享 We Care We Share">
+  <Header />
+  
+  <main class="pt-20">
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-to-b from-sky-50 to-white overflow-hidden">
+      <!-- Decorative trees -->
+      <img 
+        src="/images/team/decoration/team-tree1.png" 
+        alt="" 
+        class="absolute top-10 left-10 w-24 md:w-36 opacity-80"
+        data-aos="fade-right"
+        data-aos-delay="200"
+      />
+      <img 
+        src="/images/team/decoration/team-tree2.png" 
+        alt="" 
+        class="absolute top-20 right-10 w-32 md:w-52 opacity-80"
+        data-aos="fade-left"
+        data-aos-delay="200"
+      />
+      
+      <div class="container mx-auto px-4 text-center relative z-10">
+        <h1 
+          class="text-5xl md:text-7xl font-display font-bold text-primary mb-4"
+          data-aos="fade-down"
+        >
+          TEAM
+        </h1>
+        <h2 
+          class="text-3xl md:text-4xl font-display font-bold text-dark"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          團隊介紹
+        </h2>
+      </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- Content -->
+          <div class="order-2 lg:order-1" data-aos="fade-right">
+            <p class="text-primary font-semibold mb-2">創辦人暨計畫主持人</p>
+            <h2 class="text-4xl md:text-5xl font-display font-bold text-dark mb-2">
+              黃芸茵 <span class="text-2xl md:text-3xl text-gray-600">教授</span>
+            </h2>
+            <p class="text-lg text-gray-600 mb-6">國立清華大學英語教育中心</p>
+            
+            <div class="prose prose-lg text-gray-700">
+              <p>
+                投身語言教育數十年，場景從台灣到海外，身分從學生到家長，如今在新竹落腳，黃芸茵教授在教育場域中深刻地感受到英語力是生活與世界的連結；除了在課堂中實踐這樣的感悟與精神，黃教授創立NTHU 3MT為清華學子精進跨領域溝通的真實舞台。懷抱著這份熱忱，黃教授創辦「童心。同享」Podcast，期望為國小學童提供一個用英語表達自我、分享生活的真實場域。她深信，每一個孩子都有潛力通過語言打開世界的大門，而這個Podcast正是她實現這一願景的重要一步。通過這個平台，她希望孩子們能在充滿趣味和互動的環境中，培養英語學習的興趣，並且感受到語言學習帶來的樂趣與力量。
+              </p>
+            </div>
+          </div>
+          
+          <!-- Image with SVG mask -->
+          <div class="order-1 lg:order-2" data-aos="fade-left" data-aos-delay="100">
+            <div class="relative flex justify-center">
+              <!-- SVG masked image container -->
+              <div class="relative w-[480px] h-[420px] md:w-[600px] md:h-[520px]">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 494 430" 
+                  class="w-full h-full"
+                >
+                  <defs>
+                    <clipPath id="founderMask">
+                      <path d="M15.0516 243.271C1.00665 270.256 -3.54984 302.274 4.63466 333.99C22.2628 402.303 92.1073 443.332 160.657 425.642C180.103 420.624 197.369 411.408 211.702 399.222C233.207 381.372 260.836 372.645 288.678 374.864C309.474 376.683 330.964 375.1 352.33 369.586C453.068 343.591 513.723 241.15 487.818 140.76C461.912 40.3708 359.261 -19.9292 258.523 6.0664C231.231 13.1091 206.911 25.8019 186.422 42.5329C168.302 57.2922 145.072 64.3217 121.808 62.1341C110.68 60.984 99.1473 61.7127 87.6853 64.6705C36.2452 77.9447 5.26663 130.265 18.4949 181.527C18.9313 183.218 19.4233 184.895 19.9432 186.564C25.9225 205.366 24.1511 225.754 15.0238 243.278L15.0516 243.271Z" />
+                    </clipPath>
+                  </defs>
+                  <image 
+                    href="/images/team/people/team-img1.jpg" 
+                    width="494" 
+                    height="430" 
+                    preserveAspectRatio="xMidYMid slice"
+                    clip-path="url(#founderMask)"
+                  />
+                </svg>
+                
+                <!-- Cloud decoration - overlapping left side of the mask -->
+                <img 
+                  src="/images/team/decoration/team-cloud3.png" 
+                  alt="" 
+                  class="absolute top-1/2 -translate-y-1/2 w-20 md:w-24 opacity-90 pointer-events-none"
+                  style="left: -50px;"
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Members Section -->
+    <section class="py-20 bg-gradient-to-b from-sky-50 to-white relative overflow-hidden">
+      <!-- Background decorations -->
+      <img 
+        src="/images/team/team-bg1.png" 
+        alt="" 
+        class="absolute bottom-0 left-0 w-64 md:w-96 opacity-60 pointer-events-none"
+      />
+      <img 
+        src="/images/team/team-bg2.png" 
+        alt="" 
+        class="absolute bottom-0 right-0 w-64 md:w-96 opacity-60 pointer-events-none"
+      />
+
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+          <h2 
+            class="text-4xl md:text-5xl font-display font-bold text-primary mb-4"
+            data-aos="fade-up"
+          >
+            團隊成員
+          </h2>
+          <p 
+            class="text-gray-600 text-lg"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            一群熱愛教育、充滿創意的夥伴
+          </p>
+        </div>
+
+        {/* Two columns: 建功小隊 (left) and 舊社小隊 (right) */}
+        <div class="w-full">
+          <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+          
+          {/* 建功小隊 - Left Column */}
+          <div class="flex flex-col" data-aos="fade-right">
+            {/* Team badge and title */}
+            <div class="flex flex-col items-center mb-8">
+              <img 
+                src="/images/team/team-team1.png" 
+                alt="建功小隊"
+                class="w-40 h-40 md:w-48 md:h-48 object-contain mb-4"
+              />
+              <h3 class="text-2xl md:text-3xl font-display font-bold text-primary">
+                建功小隊
+              </h3>
+            </div>
+            
+            {/* Team members stacked vertically */}
+            <div class="flex flex-col gap-6">
+              {jiangongTeam.map((member, index) => (
+                <div 
+                  class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
+                  <div class="p-4">
+                    <div class="grid grid-cols-2 items-center gap-0">
+                      <div class="flex justify-start">
+                        <img 
+                          src={member.image} 
+                          alt={member.name}
+                          class="w-[140px] h-[140px] object-cover hover:scale-105 transition-transform duration-500"
+                          style={`-webkit-mask-image: url(/images/team/background/team-mask3.png); mask-image: url(/images/team/background/team-mask3.png); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
+                        />
+                      </div>
+
+                      <div class="flex flex-col justify-center px-4 text-center">
+                        <h4 class="text-xl font-display font-bold text-dark mb-1">
+                          {member.name}
+                        </h4>
+                        <p class="text-xs text-gray-500 leading-snug" set:html={member.school} />
+                      </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-sky-100">
+                      <p class="text-gray-600 text-xs leading-relaxed text-left">
+                        {member.bio}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 舊社小隊 - Right Column */}
+          <div class="flex flex-col" data-aos="fade-left">
+            {/* Team badge and title */}
+            <div class="flex flex-col items-center mb-8">
+              <img 
+                src="/images/team/team-team2.png" 
+                alt="舊社小隊"
+                class="w-40 h-40 md:w-48 md:h-48 object-contain mb-4"
+              />
+              <h3 class="text-2xl md:text-3xl font-display font-bold text-primary">
+                舊社小隊
+              </h3>
+            </div>
+            
+            {/* Team members stacked vertically */}
+            <div class="flex flex-col gap-6">
+              {jiusheTeam.map((member, index) => (
+                <div 
+                  class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  data-aos="fade-up"
+                  data-aos-delay={100 + (index * 100)}
+                >
+                  <div class="p-4">
+                    <div class="grid grid-cols-2 items-center gap-0">
+                      <div class="flex justify-start">
+                        <img 
+                          src={member.image} 
+                          alt={member.name}
+                          class="w-[140px] h-[140px] object-cover hover:scale-105 transition-transform duration-500"
+                          style={`-webkit-mask-image: url(/images/team/background/team-mask3.png); mask-image: url(/images/team/background/team-mask3.png); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
+                        />
+                      </div>
+
+                      <div class="flex flex-col justify-center px-4 text-center">
+                        <h4 class="text-xl font-display font-bold text-dark mb-1">
+                          {member.name}
+                        </h4>
+                        <p class="text-xs text-gray-500 leading-snug" set:html={member.school} />
+                      </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-sky-100">
+                      <p class="text-gray-600 text-xs leading-relaxed text-left">
+                        {member.bio}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Milestones Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 
+            class="text-4xl md:text-5xl font-display font-bold text-primary mb-2"
+            data-aos="fade-up"
+          >
+            MILESTONES
+          </h2>
+          <p 
+            class="text-3xl font-display font-bold text-dark"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            計畫大事記
+          </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="max-w-3xl mx-auto">
+          {milestones.map((milestone, index) => (
+            <div 
+              class="relative mb-12 last:mb-0"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div class="bg-gradient-to-br from-sky-50 to-white rounded-2xl p-8 shadow-lg border border-sky-100">
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <div class="w-4 h-4 bg-white rounded-full"></div>
+                  </div>
+                  <span class="px-6 py-2 bg-primary text-white rounded-full font-bold text-xl">
+                    {milestone.date}
+                  </span>
+                </div>
+                <ul class="space-y-3 ml-16">
+                  {milestone.events.map((event) => (
+                    <li class="flex items-start gap-3 text-gray-700">
+                      <svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                      </svg>
+                      <span>{event}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Join Us CTA - Commented out as not in original page -->
+    <!--
+    <section class="py-20 bg-gradient-to-r from-primary to-primary-dark text-white">
+      <div class="container mx-auto px-4 text-center">
+        <h2 
+          class="text-3xl md:text-4xl font-display font-bold mb-4"
+          data-aos="fade-up"
+        >
+          想加入我們嗎？
+        </h2>
+        <p 
+          class="text-xl text-white/80 mb-8 max-w-2xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          如果你對語言教育充滿熱情，想要為孩子們創造更好的學習體驗，歡迎與我們聯繫！
+        </p>
+        <a 
+          href="/contact" 
+          class="inline-flex items-center px-8 py-4 bg-white text-primary rounded-full font-semibold hover:bg-secondary hover:text-white transition-all hover:scale-105 shadow-lg"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          聯絡我們
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </section>
+    -->
+  </main>
+
+  <Footer />
+</Layout>
+
+<!-- AOS Initialization -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+<script>
+  import AOS from 'aos';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50,
+    });
+  });
+</script>

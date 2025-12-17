@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import NewsSection from '../components/NewsSection.astro';
+import About from '../components/About.astro';
+import Footer from '../components/Footer.astro';
+
+// Sample news data - later you can fetch this from a CMS or markdown files
+const recentNews = [
+  {
+    title: '【錄音花絮來啦！】🎙️【Recording in Action!】',
+    excerpt: '繼開心的 Meet & Greet 之後，我們的錄音活動正式展開！看看小朋友們認真錄音的可愛模樣...',
+    date: '2025.12.13',
+    slug: 'news-7-recording-in-action',
+    image: '/images/news/recording.jpg',
+  },
+  {
+    title: '【Meet & Greet Highlights】【相見歡花絮】',
+    excerpt: '這學期《Kid Bilingual Podcast》的相見歡活動圓滿落幕！感謝所有參與的小朋友和老師...',
+    date: '2025.12.12',
+    slug: 'news-6-meet-and-greet-highlights',
+    image: '/images/news/meet-greet.jpg',
+  },
+  {
+    title: '🌟 WE CARE WE SHARE Season 5 正式開跑！',
+    excerpt: 'WE CARE WE SHARE Season 5 is Here! 全新一季的雙語播客計畫即將展開...',
+    date: '2025.09.23',
+    slug: 'news-5-season5-is-here',
+    image: '/images/news/season5.jpg',
+  },
+];
+---
+
+<Layout title="童心。同享 We Care We Share">
+  <Header />
+  <main class="pt-20">
+    <Hero />
+    <Stats />
+    <NewsSection news={recentNews} />
+    <About />
+  </main>
+  <Footer />
+</Layout>

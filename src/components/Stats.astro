@@ -1,0 +1,107 @@
+---
+// Stats counter component with icons - matching original WordPress design
+interface Stat {
+  value: number;
+  label: string;
+  suffix?: string;
+  icon: string;
+}
+
+const stats: Stat[] = [
+  { value: 6, label: '合作國小', suffix: '間', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-1.svg' },
+  { value: 5, label: '發行季數', suffix: '季', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-3.svg' },
+  { value: 50, label: '發行集數', suffix: '集', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-3.svg' },
+  { value: 100, label: '進班錄音', suffix: '次', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-1.svg' },
+  { value: 500, label: '小朋友參與錄音', suffix: '位', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-1.svg' },
+  { value: 30, label: '班級參與', suffix: '班', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-1.svg' },
+];
+---
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+      {stats.map((stat, index) => (
+        <div 
+          class="flex flex-col items-center animate-fade-in"
+          style={`animation-delay: ${index * 0.1}s`}
+        >
+          <!-- Icon with spinning circle decoration -->
+          <div class="relative w-24 h-24 flex items-center justify-center mb-4">
+            <img 
+              src="https://www.wecareweshare.tw/wp-content/uploads/2024/10/circle4.svg" 
+              class="absolute inset-0 w-full h-full animate-spin-slow" 
+              alt=""
+            />
+            <img 
+              src={stat.icon} 
+              class="w-12 h-12 relative z-10" 
+              alt={stat.label}
+            />
+          </div>
+          
+          <!-- Counter value -->
+          <h3 class="text-3xl font-bold text-primary">
+            <span class="counter" data-target={stat.value}>0</span>
+            <span class="text-sm text-dark">{stat.suffix}</span>
+          </h3>
+          <p class="text-sm text-gray-500 mt-1">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+</style>
+
+<script>
+  // Intersection Observer for counter animation
+  const observerOptions: IntersectionObserverInit = {
+    threshold: 0.5,
+    rootMargin: '0px',
+  };
+
+  const counters = document.querySelectorAll('.counter');
+  let animated = false;
+
+  const animateCounter = (counter: Element): void => {
+    const target = parseInt(counter.getAttribute('data-target') || '0', 10);
+    const duration = 2000; // 2 seconds
+    const step = target / (duration / 16); // 60fps
+    let current = 0;
+
+    const updateCounter = (): void => {
+      current += step;
+      if (current < target) {
+        counter.textContent = Math.floor(current).toLocaleString();
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target.toLocaleString();
+      }
+    };
+
+    updateCounter();
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        counters.forEach(animateCounter);
+      }
+    });
+  }, observerOptions);
+
+  // Observe the first counter's parent section
+  const statsSection = document.querySelector('.counter')?.closest('section');
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+</script>

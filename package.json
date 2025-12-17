@@ -1,0 +1,19 @@
+{
+  "name": "wecareweshare-website",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "童心・同享 We Care We Share 國小雙語播客協作團隊官方網站",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/netlify": "^6.6.3",
+    "@astrojs/tailwind": "^6.0.2",
+    "aos": "^2.3.4",
+    "astro": "^5.16.6",
+    "tailwindcss": "^3.4.19"
+  }
+}

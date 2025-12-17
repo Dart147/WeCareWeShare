@@ -1,0 +1,96 @@
+---
+// Navigation component with mobile menu support
+interface NavItem {
+  label: string;      // English label (for code readability)
+  labelZh: string;    // Chinese label (displayed on site)
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { label: 'About', labelZh: 'Podcast介紹', href: '/#about' },
+  { label: 'Team', labelZh: '團隊介紹', href: '/team' },
+  { label: 'News', labelZh: '最新消息', href: '/news' },
+  { label: 'Contest', labelZh: '說故事比賽', href: '/storytelling-contest' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300" id="header">
+  <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 group">
+      <img 
+        src="https://www.wecareweshare.tw/wp-content/uploads/2024/10/logo-new-header2.png" 
+        alt="We Care We Share Logo" 
+        class="h-12 w-auto transition-transform group-hover:scale-105"
+      />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <ul class="hidden md:flex items-center gap-6">
+      {navItems.map((item) => (
+        <li>
+          <a 
+            href={item.href}
+            class="relative py-2 text-gray-700 hover:text-primary transition-colors font-medium group"
+          >
+            <span class="block">{item.labelZh}</span>
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile Menu Button -->
+    <button 
+      class="md:hidden p-2 text-gray-700 hover:text-primary transition-colors"
+      id="mobile-menu-btn"
+      aria-label="Toggle menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
+    <ul class="container mx-auto px-4 py-4 space-y-2">
+      {navItems.map((item) => (
+        <li>
+          <a 
+            href={item.href}
+            class="block py-3 px-4 text-gray-700 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors"
+          >
+            {item.labelZh}
+            <span class="text-xs text-gray-400 ml-2">{item.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.querySelector('.menu-icon');
+  const closeIcon = document.querySelector('.close-icon');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  // Header scroll effect
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('shadow-md');
+    } else {
+      header?.classList.remove('shadow-md');
+    }
+  });
+</script>
