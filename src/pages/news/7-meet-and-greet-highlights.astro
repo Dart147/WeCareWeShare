@@ -3,29 +3,23 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { Image } from 'astro:assets';
-import CoverImg from '../../assets/news/news6/post1120_2.jpg';
-import canvaImgupperLeft from '../../assets/news/news6/post1120_1.jpg';
-import canvaImglowerLeft from '../../assets/news/news6/post1120_4.jpg';
-import canvaImgright from '../../assets/news/news6/post1120_3.jpg';
+import CoverImg from '../../assets/news/news7/post1120_2.jpg';
+import canvaImgupperLeft from '../../assets/news/news7/post1120_1.jpg';
+import canvaImglowerLeft from '../../assets/news/news7/post1120_4.jpg';
+import canvaImgright from '../../assets/news/news7/post1120_3.jpg';
 
 export { CoverImg };
 
 export const newsMeta = {
-  title: '【Meet & Greet Highlights】【相見歡花絮】',
-  excerpt: '這學期《Kid Bilingual Podcast》的相見歡活動圓滿落幕！感謝所有參與的小朋友和老師...',
-  date: '2025.12.12',
-  slug: '6-meet-and-greet-highlights',
-  category: 'Activities',
-};
-
-const newsData = {
-  title: '【Meet & Greet Highlights】【相見歡花絮】',
+  title: '【相見歡花絮】【Meet & Greet Highlights】',
   date: '2025.12.12',
   category: 'Activities',
+  excerpt: '這學期《Kid Bilingual Podcast Production》課的十組同學都和小朋友們見面啦！...',
+  slug: '7-meet-and-greet-highlights',
 };
 ---
 
-<Layout title={`${newsData.title} | 童心・同享 We Care We Share`}>
+<Layout title={`${newsMeta.title} | 童心・同享 We Care We Share`}>
   <Header />
   <main class="pt-24 pb-20 min-h-screen bg-gray-50">
     <div class="container mx-auto px-4 max-w-4xl">
@@ -45,12 +39,12 @@ const newsData = {
       <header class="mb-8">
         <div class="flex items-center gap-3 mb-4">
           <span class="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full font-medium">
-            {newsData.category}
+            {newsMeta.category}
           </span>
-          <time class="text-gray-500 text-sm">{newsData.date}</time>
+          <time class="text-gray-500 text-sm">{newsMeta.date}</time>
         </div>
         <h1 class="text-3xl md:text-4xl font-display font-bold text-gray-800">
-          {newsData.title}
+          {newsMeta.title}
         </h1>
       </header>
 

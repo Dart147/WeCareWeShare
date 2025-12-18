@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import CoverImg from '../../assets/news/news5/storytellingend.jpg';
+
+export { CoverImg };
+
+export const newsMeta = {
+  title: "英語說故事比賽圓滿落幕！ It's a Wrap on the Storytelling Contest!",
+  date: '2025.6.7',
+  category: 'Announcements',
+  excerpt: '童心。同享 × 建功國小 英語說故事比賽」決賽已於 5/27 中午精彩落幕！...',
+  slug: '5-Its-a-wrap-on-the-storytelling-contest',
+};
+---
+Jian Gong Elementary School
+
+<Layout title={`${newsMeta.title} | 童心・同享 We Care We Share`}>
+  <Header />
+  <main class="pt-24 pb-20 min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+      
+      <!-- Back button -->
+      <a 
+        href="/news" 
+        class="inline-flex items-center text-primary hover:text-primary-dark mb-6 transition-colors"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        返回最新消息
+      </a>
+
+      <!-- Article header -->
+      <header class="mb-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full font-medium">
+            {newsMeta.category}
+          </span>
+          <time class="text-gray-500 text-sm">{newsMeta.date}</time>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-gray-800">
+          {newsMeta.title}
+        </h1>
+      </header>
+
+      <!-- Article content -->
+      <article class="bg-white shadow-lg rounded-lg p-8 mb-8">
+        
+        <!-- Hero image -->
+        <div class="mb-8">
+          <Image 
+            src={CoverImg}
+            alt="Group Photo" 
+            class="w-full h-auto rounded-lg object-cover"
+          />
+        </div>
+
+        <!-- Chinese content -->
+        <div class="mb-8 prose prose-lg max-w-none">
+          <p class="text-lg mb-4 text-gray-700">
+            童心。同享 × 建功國小 英語說故事比賽」決賽已於 5/27 中午精彩落幕！👏👏👏<br>
+            孩子們用流利的英語、自信的台風，生動地表現出自己最好的一面，展現了豐富的語言力與想像力！每一位站上舞台的小小說書人，都值得掌聲與讚賞！🌟📖
+          </p>
+          <p class="text-xl mb-4 text-gray-700 font-bold">
+            特別感謝
+          </p>
+          <ul class="list-none space-y-2 mb-6">
+            <li>🙏 建功國小的大力協助，讓這場比賽能順利舉辦，成為孩子們學習與展現的美好回憶。</li>
+            <li>🙏 校長的全程蒞臨與支持，讓孩子們深刻感受到教育現場的鼓勵與溫度。</li> 
+            <li>🙏 評審老師們的專業眼光與細心講評，讓比賽更具啟發性與深度，不只給予孩子們寶貴的學習回饋，也給予我們許多寶貴的建議。</li>
+          </ul>
+          <p class="text-xl mb-4 text-gray-700 font-bold">
+            恭喜本次得獎者
+          </p>
+          <ul class="list-none space-y-2 mb-6">
+            <li>🏆 第一名：林之閑</li>
+            <li>🥈 第二名：陳心吾</li>
+            <li>🥉 第三名：李昀芩</li>
+            <li>🌟 最佳人氣獎：賴沁妍</li>
+            <li>💪 最佳勇氣獎：陳雋程</li>
+            <li>🎤 最佳表現獎：蘇靖璿</li>
+          </ul>
+          <p class="text-lg mb-4 text-gray-700">
+            這是一場屬於孩子們的語言饗宴，也是一段難忘的學習旅程。謝謝每一位參與者、老師、家長以及觀眾的陪伴與掌聲，我們一起為孩子們寫下了美好的故事篇章。📖🌟<br>
+            讓我們期待下一次的精彩再會吧～🎉
+          </p>
+        </div>
+
+        <!-- Divider -->
+        <hr class="mb-8 border-gray-200" />
+
+        <!-- English content -->
+        <div class="mb-8 prose prose-lg max-w-none">
+          <p class="text-lg mb-4 text-gray-700">
+            The finals of the <strong>We Care We Share x Jian Gong Elementary School English Storytelling Contest</strong> came to a wonderful close on May 27th! 👏👏👏<br>
+            With fluent English and amazing confidence, the children shined their brightest, and showcasing their imagination! Every single little storyteller deserves a huge round of applause! 🌟📖
+          </p>
+          <p class="text-xl mb-4 text-gray-700 font-bold">
+            Special Thanks to:
+          </p>
+          <ul class="list-none space-y-2 mb-6">
+            <li><strong>Jian Gong Elementary School</strong> for your tremendous support. You made this event run smoothly and created a beautiful memory for the kids</li>
+            <li><strong>The Principal</strong> for being with us the whole time. Your presence made the children feel truly supported and encouraged</li>
+            <li><strong>The Judges</strong> or your expertise and thoughtful feedback. You didn't just grade them; you gave them—and us—valuable advice to help us grow</li>
+          </ul>
+          <p class="text-xl mb-4 text-gray-700 font-bold">
+            Congratulations to the Winners:
+          </p>
+          <ul class="list-none space-y-2 mb-6">
+            <li>🏆 1st Place: Lin Chih-Hsien</li>
+            <li>🥈 2nd Place: Chen Hsin-Wu</li>
+            <li>🥉 3rd Place: Li Yun-Chin</li>
+            <li>🌟 Most Popular Award: Lai Chin-Yen</li>
+            <li>💪 Best Courage Award: Chen Chun-Cheng</li>
+            <li>🎤 Best Performance Award: Su Ching-Hsuan</li>
+          </ul>
+          <p class="text-lg mb-4 text-gray-700">
+            This wasn't just a contest; it was a feast of storytelling and an unforgettable journey for everyone involved. Thank you to the participants, teachers, parents, and everyone who came to watch for your support and cheers. Together, we've created a beautiful memory for these children. 📖🌟
+          </p>
+          <p class="text-lg mb-4 text-gray-700"></p> 
+            Until next time! 🎉
+          </p>
+        </div>
+
+      </article>
+
+      <!-- Share or related posts section (optional) -->
+      <div class="text-center">
+        <a 
+          href="/news"
+          class="inline-flex items-center justify-center px-8 py-3 border-2 border-primary text-primary rounded-full font-semibold hover:bg-primary hover:text-white transition-all"
+        >
+          查看更多消息
+        </a>
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
