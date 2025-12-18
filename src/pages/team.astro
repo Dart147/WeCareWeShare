@@ -3,11 +3,32 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
+import { Image } from 'astro:assets';
+
+import type { ImageMetadata } from 'astro';
+
+import teamTree1 from '../assets/team/decoration/team-tree1.png';
+import teamTree2 from '../assets/team/decoration/team-tree2.png';
+import teamCloud3 from '../assets/team/decoration/team-cloud3.png';
+
+import teamBg1 from '../assets/team/team-bg1.png';
+import teamBg2 from '../assets/team/team-bg2.png';
+import teamTeam1 from '../assets/team/team-team1.png';
+import teamTeam2 from '../assets/team/team-team2.png';
+
+import teamMask3 from '../assets/team/background/team-mask3.png';
+
+import teamImg1 from '../assets/team/people/team-img1.jpg';
+import teamImg2 from '../assets/team/people/team-img2.jpg';
+import teamImg3 from '../assets/team/people/team-img3.jpg';
+import teamImg4 from '../assets/team/people/team-img4.jpg';
+import teamImg5 from '../assets/team/people/team-img5.jpg';
+
 // Team member data
 interface TeamMember {
   name: string;
   school: string;
-  image: string;
+  image: ImageMetadata;
   bio: string;
 }
 
@@ -16,13 +37,13 @@ const jiangongTeam: TeamMember[] = [
   {
     name: '許宸豪',
     school: '國立清華大學<br>清華學院學士班',
-    image: '/images/team/people/team-img5.jpg',
+    image: teamImg5,
     bio: '想走體制內教育，卻以一條體制外的路培養自己。目前是清大不分系的學生，興趣為地方創生及教育。努力地結合兩者，串聯資源，點亮台灣各個鄉鎮的美。希望透過We Care We Share交流多元文化，使國際學生認識台灣，使小學生認識世界。',
   },
   {
     name: '林昀蓁',
     school: '國立清華大學<br>幼兒教育學系',
-    image: '/images/team/people/team-img3.jpg',
+    image: teamImg3,
     bio: '過去接觸教育的經驗中，面對不同年齡的孩子，總能從他們身上看到自己過去成長的一些痕跡，也時常從他們的學習現況中看到想要改變的地方，因此抱持著「挑戰自己對於和孩子互動有多少熱忱」的心態參與這個計畫。幾個月過後的今天，雖然不確定英文、Podcast等這些東西給孩子們帶來的改變是什麼，但藉由語言、文化又或者彼此的情緒共鳴，從聆聽到表達，再從表達到聆聽，創造彼此生活中安心、舒服的一小段時光，一起朝著自己的路前進……。很高興能夠和不同特色的夥伴合作，成為孩子們童年點滴中的一部份!',
   },
 ];
@@ -32,13 +53,13 @@ const jiusheTeam: TeamMember[] = [
   {
     name: '邱維均',
     school: '國立清華大學<br>外國語文學系',
-    image: '/images/team/people/team-img2.jpg',
+    image: teamImg2,
     bio: '目前為外文系與小教師培生，對於語言學習的熱情使我與We Care, We Share連結，進而讓我有機會進到國小教學現場，真正接觸到每個小小靈魂。努力在體制內做出教育創新，鼓勵孩子勇於嘗試，將雙語教育融入日常，陪伴孩子快樂學習。',
   },
   {
     name: '賴郁婷',
     school: '國立清華大學<br>跨院國際博士班',
-    image: '/images/team/people/team-img4.jpg',
+    image: teamImg4,
     bio: '《幫助孩子找到學習的熱情，陪伴他們一起成長》在教學現場，常常遇到孩子們缺乏學習動機的問題。當他們無法理解學習的目的時，難以體會學習的樂趣，自然無法期待學習帶來的成就感與改變。教學內容如果無法引起孩子的共鳴，他們便無法產生興趣，學習因而容易侷限在課堂內，缺乏自主性與永續性。身為一名致力於翻轉教學的教育工作者，加入We Care We Share 團隊正是我對此議題的回應。希望透過貼近生活的方式，帶領孩子錄製英語podcast，讓他們有機會把英語從課堂與考試的框架中解放出來，延伸到真實生活的應用中。',
   },
 ];
@@ -87,16 +108,16 @@ const milestones: Milestone[] = [
     <!-- Hero Section -->
     <section class="relative py-20 bg-gradient-to-b from-sky-50 to-white overflow-hidden">
       <!-- Decorative trees -->
-      <img 
-        src="/images/team/decoration/team-tree1.png" 
-        alt="" 
+      <Image
+        src={teamTree1}
+        alt=""
         class="absolute top-10 left-10 w-24 md:w-36 opacity-80"
         data-aos="fade-right"
         data-aos-delay="200"
       />
-      <img 
-        src="/images/team/decoration/team-tree2.png" 
-        alt="" 
+      <Image
+        src={teamTree2}
+        alt=""
         class="absolute top-20 right-10 w-32 md:w-52 opacity-80"
         data-aos="fade-left"
         data-aos-delay="200"
@@ -154,7 +175,7 @@ const milestones: Milestone[] = [
                     </clipPath>
                   </defs>
                   <image 
-                    href="/images/team/people/team-img1.jpg" 
+                    href={teamImg1.src} 
                     width="494" 
                     height="430" 
                     preserveAspectRatio="xMidYMid slice"
@@ -163,9 +184,9 @@ const milestones: Milestone[] = [
                 </svg>
                 
                 <!-- Cloud decoration - overlapping left side of the mask -->
-                <img 
-                  src="/images/team/decoration/team-cloud3.png" 
-                  alt="" 
+                <Image
+                  src={teamCloud3}
+                  alt=""
                   class="absolute top-1/2 -translate-y-1/2 w-20 md:w-24 opacity-90 pointer-events-none"
                   style="left: -50px;"
                   data-aos="fade-up"
@@ -181,14 +202,14 @@ const milestones: Milestone[] = [
     <!-- Team Members Section -->
     <section class="py-20 bg-gradient-to-b from-sky-50 to-white relative overflow-hidden">
       <!-- Background decorations -->
-      <img 
-        src="/images/team/team-bg1.png" 
-        alt="" 
+      <Image
+        src={teamBg1}
+        alt=""
         class="absolute bottom-0 left-0 w-64 md:w-96 opacity-60 pointer-events-none"
       />
-      <img 
-        src="/images/team/team-bg2.png" 
-        alt="" 
+      <Image
+        src={teamBg2}
+        alt=""
         class="absolute bottom-0 right-0 w-64 md:w-96 opacity-60 pointer-events-none"
       />
 
@@ -217,8 +238,8 @@ const milestones: Milestone[] = [
           <div class="flex flex-col" data-aos="fade-right">
             {/* Team badge and title */}
             <div class="flex flex-col items-center mb-8">
-              <img 
-                src="/images/team/team-team1.png" 
+              <Image
+                src={teamTeam1}
                 alt="建功小隊"
                 class="w-40 h-40 md:w-48 md:h-48 object-contain mb-4"
               />
@@ -238,11 +259,11 @@ const milestones: Milestone[] = [
                   <div class="p-4">
                     <div class="grid grid-cols-2 items-center gap-0">
                       <div class="flex justify-center">
-                        <img 
-                          src={member.image} 
+                        <Image
+                          src={member.image}
                           alt={member.name}
                           class="w-[160px] h-[160px] md:w-[180px] md:h-[180px] object-cover hover:scale-105 transition-transform duration-500"
-                          style={`-webkit-mask-image: url(/images/team/background/team-mask3.png); mask-image: url(/images/team/background/team-mask3.png); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
+                          style={`-webkit-mask-image: url(${teamMask3.src}); mask-image: url(${teamMask3.src}); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
                         />
                       </div>
 
@@ -269,8 +290,8 @@ const milestones: Milestone[] = [
           <div class="flex flex-col" data-aos="fade-left">
             {/* Team badge and title */}
             <div class="flex flex-col items-center mb-8">
-              <img 
-                src="/images/team/team-team2.png" 
+              <Image
+                src={teamTeam2}
                 alt="舊社小隊"
                 class="w-40 h-40 md:w-48 md:h-48 object-contain mb-4"
               />
@@ -290,11 +311,11 @@ const milestones: Milestone[] = [
                   <div class="p-4">
                     <div class="grid grid-cols-2 items-center gap-0">
                       <div class="flex justify-center">
-                        <img 
-                          src={member.image} 
+                        <Image
+                          src={member.image}
                           alt={member.name}
                           class="w-[160px] h-[160px] md:w-[180px] md:h-[180px] object-cover hover:scale-105 transition-transform duration-500"
-                          style={`-webkit-mask-image: url(/images/team/background/team-mask3.png); mask-image: url(/images/team/background/team-mask3.png); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
+                          style={`-webkit-mask-image: url(${teamMask3.src}); mask-image: url(${teamMask3.src}); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
                         />
                       </div>
 
