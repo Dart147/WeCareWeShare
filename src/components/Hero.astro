@@ -1,11 +1,26 @@
 ---
 // Hero section matching original WordPress design - two column layout
+import { Image } from "astro:assets";
+import heroBanner from '../assets/homepage/index-bn-4.png';
+import heroBackground from '../assets/homepage/index-bn-bg2.png';
+import jumpingCloudIcon from '../assets/homepage/hp-jumping-cloud.png';
+import slide1 from '../assets/homepage/hp-slide-1.jpg';
+
+const slides = [
+  slide1,
+];
+
+const heroSection = {
+  banner: heroBanner,
+  bg: heroBackground,
+  CloudIcon: jumpingCloudIcon
+};
 ---
 
 <section class="relative w-full overflow-hidden bg-gradient-to-b from-sky-50 via-white to-amber-50/30 py-10 md:py-20">
   <!-- Decorative floating elements -->
-  <img 
-    src="https://www.wecareweshare.tw/wp-content/uploads/2024/09/index-bn-4.png" 
+  <Image
+    src={heroSection.banner}
     class="absolute top-10 left-10 w-8 md:w-12 animate-pulse opacity-60" 
     alt=""
   />
@@ -57,22 +72,22 @@
     <!-- Right side: Hero image -->
     <div class="w-full md:w-1/2 relative">
       <!-- Background decoration -->
-      <img 
-        src="https://www.wecareweshare.tw/wp-content/uploads/2024/09/index-bn-bg2.png" 
+      <Image 
+        src= {heroSection.bg}
         class="absolute -z-10 top-10 right-0 opacity-50 w-full" 
         alt=""
       />
       
       <div class="relative z-10">
-        <img 
-          src="https://www.wecareweshare.tw/wp-content/uploads/2024/12/1239816_0-1.jpg" 
+        <Image
+          src= {slides[0]}
           class="rounded-xl shadow-xl w-full object-cover aspect-video" 
           alt="We Care We Share 活動照片" 
         />
         
         <!-- Bouncing decoration -->
-        <img 
-          src="https://www.wecareweshare.tw/wp-content/uploads/2024/09/index-bn-7.png" 
+        <Image 
+          src= {heroSection.CloudIcon}
           class="absolute -bottom-10 -left-10 w-24 md:w-40 animate-bounce z-20" 
           alt=""
         />

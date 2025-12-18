@@ -4,38 +4,44 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// Sample news data - you can later fetch from a CMS or use content collections
-interface NewsItem {
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface NewsMeta {
   title: string;
   excerpt: string;
   date: string;
   slug: string;
-  image?: string;
+  category?: string;
 }
 
-const allNews: NewsItem[] = [
-  {
-    title: '【錄音花絮來啦！】🎙️【Recording in Action!】',
-    excerpt: '繼開心的 Meet & Greet 之後，我們的錄音活動正式展開！看看小朋友們認真錄音的可愛模樣...',
-    date: '2025.12.13',
-    slug: 'news-7-recording-in-action',
-    image: '/images/news/recording.jpg',
-  },
-  {
-    title: '【Meet & Greet Highlights】【相見歡花絮】',
-    excerpt: '這學期《Kid Bilingual Podcast》的相見歡活動圓滿落幕！感謝所有參與的小朋友和老師...',
-    date: '2025.12.12',
-    slug: '6-meet-and-greet-highlights',
-    image: '/images/news/meet-greet.jpg',
-  },
-  {
-    title: '🌟 WE CARE WE SHARE Season 5 正式開跑！',
-    excerpt: 'WE CARE WE SHARE Season 5 is Here! 全新一季的雙語播客計畫即將展開...',
-    date: '2025.09.23',
-    slug: 'news-5-season5-is-here',
-    image: '/images/news/season5.jpg',
-  },
-];
+type NewsPageModule = {
+  CoverImg?: ImageMetadata;
+  newsMeta?: NewsMeta;
+};
+
+// Imports the /news/<slug>.astro pages so we can reuse their exported CoverImg
+// (define the cover image once per post).
+const newsPages = import.meta.glob<NewsPageModule>('./news/*.astro', { eager: true });
+
+
+const toComparableDate = (date: string): number => {
+  // Supports formats like: 2025.12.12 or 2025-12-12
+  const normalized = date.replace(/\./g, '-');
+  const ms = Date.parse(normalized);
+  return Number.isNaN(ms) ? 0 : ms;
+};
+
+const newsItems = Object.values(newsPages)
+  .map((mod) => {
+    if (!mod.newsMeta) return null;
+    return {
+      ...mod.newsMeta,
+      coverImage: mod.CoverImg,
+    };
+  })
+  .filter(Boolean)
+  .sort((a, b) => toComparableDate(b!.date) - toComparableDate(a!.date));
 ---
 
 <Layout title="最新消息 | 童心・同享 We Care We Share">
@@ -57,13 +63,13 @@ const allNews: NewsItem[] = [
 
       <!-- News grid -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {allNews.map((item) => (
+        {newsItems.map((item) => (
           <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
             <div class="aspect-video overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
-              {item.image ? (
-                <img 
-                  src={item.image} 
-                  alt={item.title}
+              {item?.coverImage ? (
+                <Image
+                  src={item.coverImage}
+                  alt={item?.title}
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               ) : (
@@ -73,13 +79,13 @@ const allNews: NewsItem[] = [
               )}
             </div>
             <div class="p-6">
-              <time class="text-sm text-primary font-medium">{item.date}</time>
+              <time class="text-sm text-primary font-medium">{item?.date}</time>
               <h2 class="text-lg font-bold text-gray-800 mt-2 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                <a href={`/news/${item.slug}`}>{item.title}</a>
+                <a href={`/news/${item?.slug}`}>{item?.title}</a>
               </h2>
-              <p class="text-gray-600 text-sm line-clamp-3 mb-4">{item.excerpt}</p>
+              <p class="text-gray-600 text-sm line-clamp-3 mb-4">{item?.excerpt}</p>
               <a 
-                href={`/news/${item.slug}`}
+                href={`/news/${item?.slug}`}
                 class="inline-flex items-center text-primary font-medium hover:text-primary-dark transition-colors"
               >
                 閱讀更多

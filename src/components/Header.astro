@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import logo from '../assets/icon/logo-header.png';
+
 // Navigation component with mobile menu support
 interface NavItem {
   label: string;      // English label (for code readability)
@@ -18,8 +21,8 @@ const navItems: NavItem[] = [
   <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-3 group">
-      <img 
-        src="/images/icon/logo-header.png"
+      <Image 
+        src={logo}
         alt="We Care We Share Logo" 
         class="h-12 w-auto transition-transform group-hover:scale-105"
       />

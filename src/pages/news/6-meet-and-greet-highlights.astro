@@ -2,6 +2,21 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import CoverImg from '../../assets/news/news6/post1120_2.jpg';
+import canvaImgupperLeft from '../../assets/news/news6/post1120_1.jpg';
+import canvaImglowerLeft from '../../assets/news/news6/post1120_4.jpg';
+import canvaImgright from '../../assets/news/news6/post1120_3.jpg';
+
+export { CoverImg };
+
+export const newsMeta = {
+  title: '【Meet & Greet Highlights】【相見歡花絮】',
+  excerpt: '這學期《Kid Bilingual Podcast》的相見歡活動圓滿落幕！感謝所有參與的小朋友和老師...',
+  date: '2025.12.12',
+  slug: '6-meet-and-greet-highlights',
+  category: 'Activities',
+};
 
 const newsData = {
   title: '【Meet & Greet Highlights】【相見歡花絮】',
@@ -44,8 +59,8 @@ const newsData = {
         
         <!-- Hero image -->
         <div class="mb-8">
-          <img 
-            src="https://www.wecareweshare.tw/wp-content/uploads/2025/12/post1120_2.jpg" 
+          <Image 
+            src={CoverImg}
             alt="Group Photo" 
             class="w-full h-auto rounded-lg object-cover"
           />
@@ -69,13 +84,13 @@ const newsData = {
           
           <!-- Left column: 2 stacked images -->
           <div class="flex-1 flex flex-col gap-2">
-            <img 
-              src="https://www.wecareweshare.tw/wp-content/uploads/2025/12/post1120_1.jpg" 
+            <Image 
+              src={canvaImgupperLeft}
               alt="Highlight 1" 
               class="w-full h-auto rounded-lg object-cover"
             />
-            <img 
-              src="https://www.wecareweshare.tw/wp-content/uploads/2025/12/post1120_4.jpg" 
+            <Image 
+              src={canvaImglowerLeft} 
               alt="Highlight 4" 
               class="w-full h-auto rounded-lg object-cover flex-grow"
             />
@@ -83,8 +98,8 @@ const newsData = {
 
           <!-- Right column: 1 tall image -->
           <div class="flex-1">
-            <img 
-              src="https://www.wecareweshare.tw/wp-content/uploads/2025/12/post1120_3.jpg" 
+            <Image 
+              src={canvaImgright} 
               alt="Highlight 3" 
               class="w-full h-full rounded-lg object-cover"
             />
