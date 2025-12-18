@@ -1,5 +1,8 @@
 ---
 // About section matching original WordPress design with wave divider
+import { Image } from 'astro:assets';
+import slideDeco from '../assets/homepage/playground-slide.png';
+
 ---
 
 <section class="py-20 bg-gradient-to-b from-sky-50 to-white relative" id="about">
@@ -39,8 +42,8 @@
     </div>
     
     <!-- Slide/Image decoration -->
-    <img 
-      src="https://www.wecareweshare.tw/wp-content/uploads/2024/10/index-slide.png" 
+    <Image 
+      src={slideDeco}
       class="mx-auto mt-10 w-64 md:w-80" 
       alt="Slide"
     />
