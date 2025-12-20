@@ -1,25 +1,23 @@
 /**
- * Spotify Episode Fetcher
- * 
- * This script fetches all episodes from your Spotify podcast
- * and saves them to a JSON file.
- * 
  * Usage:
- *   1. Set environment variables SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET
- *   2. Run: npx ts-node scripts/fetch-episodes.ts
+ *   1. Add your Spotify credentials to .env file
+ *   2. Run: npm run fetch-episodes
  *      Or: npx tsx scripts/fetch-episodes.ts
  */
 
-import fs from 'fs';
+import fs from 'fs'; // File system
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { config } from 'dotenv'; // Load .env
+
+// Load environment variables from .env file
+config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Your podcast show ID (from the Spotify URL)
+//WCWS show ID
 const SHOW_ID = '2r2drOqJuUMAY2ubsHS9E7';
 
-// Spotify API credentials (set these as environment variables)
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
@@ -59,17 +57,15 @@ interface Episode {
   descriptionShort: string;
   season: number | null;
   episode: number | null;
-  school: string | null;
   releaseDate: string;
   durationMs: number;
   spotifyUrl: string;
 }
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
-  console.error('❌ Missing Spotify credentials!');
-  console.error('Set SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET environment variables.');
-  console.error('\nExample:');
-  console.error('  SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy npx tsx scripts/fetch-episodes.ts');
+  console.error('Missing Spotify credentials!');
+  console.error('Please add SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET to your .env file.');
+  console.error('\nSee .env.example for reference.');
   process.exit(1);
 }
 
@@ -118,7 +114,7 @@ async function fetchAllEpisodes(accessToken: string): Promise<SpotifyEpisode[]> 
     episodes.push(...data.items);
     nextUrl = data.next;
     
-    console.log(`📥 Fetched ${episodes.length} episodes...`);
+    console.log(`Fetched ${episodes.length} episodes...`);
   }
 
   return episodes;
@@ -126,33 +122,43 @@ async function fetchAllEpisodes(accessToken: string): Promise<SpotifyEpisode[]> 
 
 /**
  * Parse season and episode number from title
- * Examples:
- *   "S5E10 - Little Nature Explorer" → { season: 5, episode: 10 }
- *   "Season 5 Episode 10: Title" → { season: 5, episode: 10 }
+ * 
+ * formats:
+ *   "(S5-E10)" at end  → { season: 5, episode: 10 }
+ *   "S2-EP9" at start  → { season: 2, episode: 9 }
+ *   "#3 - Title"       → { season: 1, episode: 3 }  (Season 1 format)
+ *   No index           → { season: null, episode: null }
  */
 function parseSeasonEpisode(title: string): { season: number | null; episode: number | null } {
-  // Pattern 1: S5E10 or S5 E10
-  const pattern1 = /S(\d+)\s*E(\d+)/i;
+  // Pattern 1: (S5-E10) or (S5-EP10) - parentheses with dash
+  const pattern1 = /\(S(\d+)-E(?:P)?(\d+)\)/i;
   const match1 = title.match(pattern1);
   if (match1) {
     return { season: parseInt(match1[1]), episode: parseInt(match1[2]) };
   }
 
-  // Pattern 2: Season 5 Episode 10
-  const pattern2 = /Season\s*(\d+)\s*Episode\s*(\d+)/i;
+  // Pattern 2: S2-EP9 or S2-E9 - no parentheses, dash separator
+  const pattern2 = /S(\d+)-E(?:P)?(\d+)/i;
   const match2 = title.match(pattern2);
   if (match2) {
     return { season: parseInt(match2[1]), episode: parseInt(match2[2]) };
   }
 
-  // Pattern 3: EP10 or Ep.10 (episode only, assume season 1)
-  const pattern3 = /EP\.?\s*(\d+)/i;
+  // Pattern 3: S5E10 or S5 E10 - no dash (fallback)
+  const pattern3 = /S(\d+)\s*E(\d+)/i;
   const match3 = title.match(pattern3);
   if (match3) {
-    return { season: 1, episode: parseInt(match3[1]) };
+    return { season: parseInt(match3[1]), episode: parseInt(match3[2]) };
   }
 
-  // No pattern found
+  // Pattern 4: #3 - Title (Season 1 format)
+  const pattern4 = /^#(\d+)\s*-/;
+  const match4 = title.match(pattern4);
+  if (match4) {
+    return { season: 1, episode: parseInt(match4[1]) };
+  }
+
+  // No pattern found - that's okay for older episodes
   return { season: null, episode: null };
 }
 
@@ -171,7 +177,6 @@ function transformEpisode(spotifyEpisode: SpotifyEpisode): Episode {
       .substring(0, 100) + '...',
     season,
     episode,
-    school: null,
     releaseDate: spotifyEpisode.release_date,
     durationMs: spotifyEpisode.duration_ms,
     spotifyUrl: spotifyEpisode.external_urls.spotify,
@@ -182,15 +187,15 @@ function transformEpisode(spotifyEpisode: SpotifyEpisode): Episode {
  * Main function
  */
 async function main(): Promise<void> {
-  console.log('🎵 Fetching episodes from Spotify...\n');
+  console.log('Fetching episodes from Spotify...\n');
 
   try {
-    console.log('🔑 Getting access token...');
+    console.log('Getting access token...');
     const accessToken = await getAccessToken();
-    console.log('✅ Access token obtained\n');
+    console.log('Access token obtained\n');
 
     const spotifyEpisodes = await fetchAllEpisodes(accessToken);
-    console.log(`\n✅ Total episodes fetched: ${spotifyEpisodes.length}\n`);
+    console.log(`\nTotal episodes fetched: ${spotifyEpisodes.length}\n`);
 
     const episodes = spotifyEpisodes.map(transformEpisode);
 
@@ -201,21 +206,17 @@ async function main(): Promise<void> {
     try {
       const existingData = fs.readFileSync(outputPath, 'utf-8');
       existingEpisodes = JSON.parse(existingData);
-      console.log(`📂 Found existing data with ${existingEpisodes.length} episodes`);
+      console.log(`Found existing data with ${existingEpisodes.length} episodes`);
     } catch {
-      console.log('📂 No existing data found, creating new file');
+      console.log('No existing data found, creating new file');
     }
 
-    // Merge: preserve manual data (school) from existing entries
-    const mergedEpisodes = episodes.map(newEp => {
-      const existing = existingEpisodes.find(e => e.spotifyId === newEp.spotifyId);
-      if (existing) {
-        return {
-          ...newEp,
-          school: existing.school,
-        };
-      }
-      return newEp;
+    // Use fetched episodes directly (no manual fields to preserve)
+    const mergedEpisodes = [...episodes];
+
+    // Sort by release date (newest first)
+    mergedEpisodes.sort((a, b) => {
+      return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
     });
 
     // Ensure the data directory exists
@@ -226,27 +227,22 @@ async function main(): Promise<void> {
 
     // Save to JSON file
     fs.writeFileSync(outputPath, JSON.stringify(mergedEpisodes, null, 2));
-    console.log(`\n💾 Saved to: ${outputPath}`);
+    console.log(`\nSaved to: ${outputPath}`);
 
     // Summary
-    const needsSchool = mergedEpisodes.filter(e => !e.school).length;
     const needsSeasonEpisode = mergedEpisodes.filter(e => e.season === null).length;
     
-    console.log('\n📊 Summary:');
+    console.log('\nSummary:');
     console.log(`   Total episodes: ${mergedEpisodes.length}`);
-    console.log(`   Need school info: ${needsSchool}`);
     console.log(`   Need season/episode parsing: ${needsSeasonEpisode}`);
     
-    if (needsSchool > 0) {
-      console.log('\n⚠️  Remember to manually add "school" for each episode!');
-    }
     if (needsSeasonEpisode > 0) {
-      console.log('⚠️  Some episodes could not parse season/episode from title.');
-      console.log('   Check your title format and update parseSeasonEpisode() if needed.');
+      console.log('Some episodes could not parse season/episode from title.');
+      console.log('Check your title format and update parseSeasonEpisode() if needed.');
     }
 
   } catch (error) {
-    console.error('❌ Error:', (error as Error).message);
+    console.error('Error:', (error as Error).message);
     process.exit(1);
   }
 }

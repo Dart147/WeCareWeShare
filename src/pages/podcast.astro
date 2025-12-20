@@ -9,7 +9,6 @@ import episodesData from '../data/episodes.json';
 
 interface Episode {
   title: string;
-  school: string | null;
   description: string;
   descriptionShort: string;
   spotifyId: string;
@@ -66,11 +65,10 @@ const seasons = [...new Set(episodes.map(ep => ep.season))].filter(Boolean).sort
           <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
             <div class="p-6">
               <!-- Season badge -->
-              <div class="flex items-center justify-between mb-4">
+              <div class="mb-4">
                 <span class="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full font-medium">
                   S{episode.season} E{episode.episode}
                 </span>
-                <span class="text-sm text-gray-500">{episode.school ?? '—'}</span>
               </div>
 
               <h2 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-primary transition-colors">
