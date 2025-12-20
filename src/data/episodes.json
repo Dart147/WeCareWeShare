@@ -1,0 +1,26 @@
+[
+  {
+    "spotifyId": "0IZEAQ0KXYhHCOfw4TRqE1",
+    "title": "S5E10 - Little Nature Explorer",
+    "description": "孩子的野生動物觀察筆記",
+    "descriptionShort": "孩子的野生動物觀察筆記...",
+    "season": 5,
+    "episode": 10,
+    "school": "建功國小",
+    "releaseDate": "2024-12-15",
+    "durationMs": 180000,
+    "spotifyUrl": "https://open.spotify.com/episode/0IZEAQ0KXYhHCOfw4TRqE1"
+  },
+  {
+    "spotifyId": "3DAK43jfmW9OfNFKPqom50",
+    "title": "S5E9 - Do You Believe in Santa?",
+    "description": "聽聽孩子們如何用英語介紹他們最好的朋友",
+    "descriptionShort": "聽聽孩子們如何用英語介紹他們最好的朋友...",
+    "season": 5,
+    "episode": 9,
+    "school": "建功國小",
+    "releaseDate": "2024-12-08",
+    "durationMs": 180000,
+    "spotifyUrl": "https://open.spotify.com/episode/3DAK43jfmW9OfNFKPqom50"
+  }
+]
