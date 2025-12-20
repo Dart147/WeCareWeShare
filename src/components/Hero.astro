@@ -1,29 +1,15 @@
 ---
 // Hero section matching original WordPress design - two column layout
 import { Image } from "astro:assets";
-import heroBanner from '../assets/homepage/index-bn-4.png';
-import heroBackground from '../assets/homepage/index-bn-bg2.png';
-import jumpingCloudIcon from '../assets/homepage/hp-jumping-cloud.png';
 import slide1 from '../assets/homepage/hp-slide-1.jpg';
 
 const slides = [
   slide1,
 ];
-
-const heroSection = {
-  banner: heroBanner,
-  bg: heroBackground,
-  CloudIcon: jumpingCloudIcon
-};
 ---
 
 <section class="relative w-full overflow-hidden bg-gradient-to-b from-sky-50 via-white to-amber-50/30 py-10 md:py-20">
   <!-- Decorative floating elements -->
-  <Image
-    src={heroSection.banner}
-    class="absolute top-10 left-10 w-8 md:w-12 animate-pulse opacity-60" 
-    alt=""
-  />
   <div class="absolute -top-20 -right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
   <div class="absolute -bottom-20 -left-20 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
   
@@ -71,12 +57,12 @@ const heroSection = {
 
     <!-- Right side: Hero image -->
     <div class="w-full md:w-1/2 relative">
-      <!-- Background decoration -->
+      <!-- Background decoration 
       <Image 
         src= {heroSection.bg}
         class="absolute -z-10 top-10 right-0 opacity-50 w-full" 
         alt=""
-      />
+      /> -->
       
       <div class="relative z-10">
         <Image
@@ -85,12 +71,12 @@ const heroSection = {
           alt="We Care We Share 活動照片" 
         />
         
-        <!-- Bouncing decoration -->
+        <!-- Bouncing decoration 
         <Image 
           src= {heroSection.CloudIcon}
           class="absolute -bottom-10 -left-10 w-24 md:w-40 animate-bounce z-20" 
           alt=""
-        />
+        /> -->
       </div>
     </div>
   </div>

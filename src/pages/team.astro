@@ -7,16 +7,8 @@ import { Image } from 'astro:assets';
 
 import type { ImageMetadata } from 'astro';
 
-import teamTree1 from '../assets/team/decoration/team-tree1.png';
-import teamTree2 from '../assets/team/decoration/team-tree2.png';
-import teamCloud3 from '../assets/team/decoration/team-cloud3.png';
-
-import teamBg1 from '../assets/team/team-bg1.png';
-import teamBg2 from '../assets/team/team-bg2.png';
 import teamTeam1 from '../assets/team/team-team1.png';
 import teamTeam2 from '../assets/team/team-team2.png';
-
-import teamMask3 from '../assets/team/background/team-mask3.png';
 
 import teamImg1 from '../assets/team/people/team-img1.jpg';
 import teamImg2 from '../assets/team/people/team-img2.jpg';
@@ -107,22 +99,6 @@ const milestones: Milestone[] = [
   <main class="pt-20">
     <!-- Hero Section -->
     <section class="relative py-20 bg-gradient-to-b from-sky-50 to-white overflow-hidden">
-      <!-- Decorative trees -->
-      <Image
-        src={teamTree1}
-        alt=""
-        class="absolute top-10 left-10 w-24 md:w-36 opacity-80"
-        data-aos="fade-right"
-        data-aos-delay="200"
-      />
-      <Image
-        src={teamTree2}
-        alt=""
-        class="absolute top-20 right-10 w-32 md:w-52 opacity-80"
-        data-aos="fade-left"
-        data-aos-delay="200"
-      />
-      
       <div class="container mx-auto px-4 text-center relative z-10">
         <h1 
           class="text-5xl md:text-7xl font-display font-bold text-primary mb-4"
@@ -159,40 +135,14 @@ const milestones: Milestone[] = [
             </div>
           </div>
           
-          <!-- Image with SVG mask -->
+          <!-- Founder Image -->
           <div class="order-1 lg:order-2" data-aos="fade-left" data-aos-delay="100">
-            <div class="relative flex justify-center">
-              <!-- SVG masked image container -->
-              <div class="relative w-[480px] h-[420px] md:w-[600px] md:h-[520px]">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 494 430" 
-                  class="w-full h-full"
-                >
-                  <defs>
-                    <clipPath id="founderMask">
-                      <path d="M15.0516 243.271C1.00665 270.256 -3.54984 302.274 4.63466 333.99C22.2628 402.303 92.1073 443.332 160.657 425.642C180.103 420.624 197.369 411.408 211.702 399.222C233.207 381.372 260.836 372.645 288.678 374.864C309.474 376.683 330.964 375.1 352.33 369.586C453.068 343.591 513.723 241.15 487.818 140.76C461.912 40.3708 359.261 -19.9292 258.523 6.0664C231.231 13.1091 206.911 25.8019 186.422 42.5329C168.302 57.2922 145.072 64.3217 121.808 62.1341C110.68 60.984 99.1473 61.7127 87.6853 64.6705C36.2452 77.9447 5.26663 130.265 18.4949 181.527C18.9313 183.218 19.4233 184.895 19.9432 186.564C25.9225 205.366 24.1511 225.754 15.0238 243.278L15.0516 243.271Z" />
-                    </clipPath>
-                  </defs>
-                  <image 
-                    href={teamImg1.src} 
-                    width="494" 
-                    height="430" 
-                    preserveAspectRatio="xMidYMid slice"
-                    clip-path="url(#founderMask)"
-                  />
-                </svg>
-                
-                <!-- Cloud decoration - overlapping left side of the mask -->
-                <Image
-                  src={teamCloud3}
-                  alt=""
-                  class="absolute top-1/2 -translate-y-1/2 w-20 md:w-24 opacity-90 pointer-events-none"
-                  style="left: -50px;"
-                  data-aos="fade-up"
-                  data-aos-delay="300"
-                />
-              </div>
+            <div class="flex justify-center">
+              <Image
+                src={teamImg1}
+                alt="黃芸茵教授"
+                class="w-full max-w-md rounded-3xl shadow-2xl object-cover"
+              />
             </div>
           </div>
         </div>
@@ -201,18 +151,6 @@ const milestones: Milestone[] = [
 
     <!-- Team Members Section -->
     <section class="py-20 bg-gradient-to-b from-sky-50 to-white relative overflow-hidden">
-      <!-- Background decorations -->
-      <Image
-        src={teamBg1}
-        alt=""
-        class="absolute bottom-0 left-0 w-64 md:w-96 opacity-60 pointer-events-none"
-      />
-      <Image
-        src={teamBg2}
-        alt=""
-        class="absolute bottom-0 right-0 w-64 md:w-96 opacity-60 pointer-events-none"
-      />
-
       <div class="container mx-auto px-4 relative z-10">
         <div class="text-center mb-16">
           <h2 
@@ -262,8 +200,7 @@ const milestones: Milestone[] = [
                         <Image
                           src={member.image}
                           alt={member.name}
-                          class="w-[160px] h-[160px] md:w-[180px] md:h-[180px] object-cover hover:scale-105 transition-transform duration-500"
-                          style={`-webkit-mask-image: url(${teamMask3.src}); mask-image: url(${teamMask3.src}); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
+                          class="w-[160px] h-[160px] md:w-[180px] md:h-[180px] object-cover rounded-2xl hover:scale-105 transition-transform duration-500"
                         />
                       </div>
 
@@ -314,8 +251,7 @@ const milestones: Milestone[] = [
                         <Image
                           src={member.image}
                           alt={member.name}
-                          class="w-[160px] h-[160px] md:w-[180px] md:h-[180px] object-cover hover:scale-105 transition-transform duration-500"
-                          style={`-webkit-mask-image: url(${teamMask3.src}); mask-image: url(${teamMask3.src}); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
+                          class="w-[160px] h-[160px] md:w-[180px] md:h-[180px] object-cover rounded-2xl hover:scale-105 transition-transform duration-500"
                         />
                       </div>
 
