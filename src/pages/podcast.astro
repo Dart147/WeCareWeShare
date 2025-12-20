@@ -49,20 +49,30 @@ const seasons = [...new Set(episodes.map(ep => ep.season))].filter(Boolean).sort
 
       <!-- Season filter -->
       <div class="flex flex-wrap justify-center gap-3 mb-12">
-        <button class="px-6 py-2 bg-primary text-white rounded-full font-medium transition-colors">
+        <button 
+          class="season-filter-btn px-6 py-2 bg-primary text-white rounded-full font-medium transition-colors active"
+          data-season="all"
+        >
           全部
         </button>
         {seasons.map((season) => (
-          <button class="px-6 py-2 bg-white text-gray-600 rounded-full font-medium hover:bg-primary hover:text-white transition-colors shadow-sm">
+          <button 
+            class="season-filter-btn px-6 py-2 bg-white text-gray-600 rounded-full font-medium hover:bg-primary hover:text-white transition-colors shadow-sm"
+            data-season={season}
+          >
             Season {season}
           </button>
         ))}
       </div>
 
       <!-- Episodes grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {episodes.map((episode) => (
-          <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="episodes-grid">
+        {episodes.map((episode, index) => (
+          <article 
+            class={`episode-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group flex flex-col h-full ${index >= 9 ? 'hidden' : ''}`}
+            data-index={index}
+            data-season={episode.season}
+          >
             <div class="p-6 flex flex-col flex-grow">
               <!-- Season badge -->
               <div class="mb-4">
@@ -93,6 +103,18 @@ const seasons = [...new Set(episodes.map(ep => ep.season))].filter(Boolean).sort
         ))}
       </div>
 
+      <!-- Load More Button -->
+      {episodes.length > 9 && (
+        <div class="text-center mt-12" id="load-more-container">
+          <button 
+            id="load-more-btn"
+            class="px-8 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg"
+          >
+            載入更多
+          </button>
+        </div>
+      )}
+
       <!-- Follow CTA -->
       <div class="text-center mt-16">
         <div class="inline-block bg-white rounded-2xl p-8 shadow-lg max-w-md">
@@ -115,3 +137,96 @@ const seasons = [...new Set(episodes.map(ep => ep.season))].filter(Boolean).sort
   </main>
   <Footer />
 </Layout>
+
+<!--Season Filter & Load More Scripts -->
+<script>
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  const loadMoreContainer = document.getElementById('load-more-container');
+  const episodeCards = document.querySelectorAll('.episode-card');
+  const filterBtns = document.querySelectorAll('.season-filter-btn');
+  
+  let currentlyShown = 9;
+  let currentFilter = 'all'; // Track current season filter
+  const loadIncrement = 9; // Load 9 more each time
+
+  // Get filtered episodes based on current season
+  function getFilteredEpisodes() {
+    if (currentFilter === 'all') {
+      return Array.from(episodeCards);
+    }
+    return Array.from(episodeCards).filter(card => 
+      card.getAttribute('data-season') === currentFilter
+    );
+  }
+
+  // Update visible episodes
+  function updateVisibleEpisodes() {
+    const filtered = getFilteredEpisodes();
+    
+    // Hide all episodes first
+    episodeCards.forEach(card => card.classList.add('hidden'));
+    
+    // Show only the first 'currentlyShown' filtered episodes
+    filtered.slice(0, currentlyShown).forEach(card => {
+      card.classList.remove('hidden');
+    });
+    
+    // Show/hide load more button
+    if (loadMoreContainer) {
+      if (filtered.length > currentlyShown) {
+        loadMoreContainer.style.display = 'block';
+      } else {
+        loadMoreContainer.style.display = 'none';
+      }
+    }
+  }
+
+  // Season filter button click handlers
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const season = btn.getAttribute('data-season');
+      
+      // Update active state
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'bg-primary', 'text-white');
+        b.classList.add('bg-white', 'text-gray-600');
+      });
+      btn.classList.add('active', 'bg-primary', 'text-white');
+      btn.classList.remove('bg-white', 'text-gray-600');
+      
+      // Update filter and reset pagination
+      currentFilter = season || 'all';
+      currentlyShown = 9;
+      updateVisibleEpisodes();
+      
+      // Scroll to top of episodes grid
+      document.getElementById('episodes-grid')?.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    });
+  });
+
+  // Load More button handler
+  loadMoreBtn?.addEventListener('click', () => {
+    const filtered = getFilteredEpisodes();
+    const nextShown = Math.min(currentlyShown + loadIncrement, filtered.length);
+    
+    currentlyShown = nextShown;
+    updateVisibleEpisodes();
+    
+    // Smooth scroll to first newly loaded episode
+    const visibleCards = Array.from(episodeCards).filter(card => 
+      !card.classList.contains('hidden')
+    );
+    const firstNewCard = visibleCards[currentlyShown - loadIncrement];
+    if (firstNewCard) {
+      setTimeout(() => {
+        firstNewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  });
+
+  // Initialize on page load
+  updateVisibleEpisodes();
+</script>

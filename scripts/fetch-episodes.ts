@@ -199,7 +199,7 @@ async function main(): Promise<void> {
 
     const episodes = spotifyEpisodes.map(transformEpisode);
 
-    // Load existing data to preserve manual entries (like school)
+    // Load existing data to preserve manual updates
     const outputPath = path.join(__dirname, '../src/data/episodes.json');
     let existingEpisodes: Episode[] = [];
     
@@ -211,8 +211,10 @@ async function main(): Promise<void> {
       console.log('No existing data found, creating new file');
     }
 
-    // Use fetched episodes directly (no manual fields to preserve)
-    const mergedEpisodes = [...episodes];
+    // Skip existing episodes, only add new ones
+    const existingIds = new Set(existingEpisodes.map(e => e.spotifyId));
+    const newEpisodes = episodes.filter(ep => !existingIds.has(ep.spotifyId));
+    const mergedEpisodes = [...existingEpisodes, ...newEpisodes];
 
     // Sort by release date (newest first)
     mergedEpisodes.sort((a, b) => {
@@ -234,10 +236,19 @@ async function main(): Promise<void> {
     
     console.log('\nSummary:');
     console.log(`   Total episodes: ${mergedEpisodes.length}`);
+    console.log(`   New episodes added: ${newEpisodes.length}`);
+    console.log(`   Existing episodes preserved: ${existingEpisodes.length}`);
     console.log(`   Need season/episode parsing: ${needsSeasonEpisode}`);
     
+    if (newEpisodes.length > 0) {
+      console.log('\n✨ New episodes:');
+      newEpisodes.forEach(ep => {
+        console.log(`   - ${ep.title}`);
+      });
+    }
+    
     if (needsSeasonEpisode > 0) {
-      console.log('Some episodes could not parse season/episode from title.');
+      console.log('\nSome episodes could not parse season/episode from title.');
       console.log('Check your title format and update parseSeasonEpisode() if needed.');
     }
 
