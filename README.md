@@ -1,5 +1,7 @@
 # 童心・同享 We Care We Share
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f58faea3-413f-411e-ab31-014f4894a9a7/deploy-status)](https://app.netlify.com/projects/wecareweshare/deploys)
+
 A bilingual podcast website for elementary school children, built with Astro and Netlify.
 
 ## About
@@ -30,7 +32,7 @@ WeCareWeShare/
     │   ├── About.astro       # Bilingual about section
     │   └── Footer.astro      # Footer with partners
     ├── data/
-    │   └── episodes.json     # Podcast episodes data (auto-generated)
+    │   └── episodes.json     # Podcast episodes data
     ├── layouts/
     │   └── Layout.astro      # Base HTML layout
     ├── pages/
@@ -40,7 +42,7 @@ WeCareWeShare/
     │   ├── news.astro        # News listing
     │   ├── contact.astro     # Contact form (Netlify Forms)
     │   └── news/             # Individual news articles
-    │       ├── ...
+    │       ├── ...           # Posts and news articles
     └── types/
         └── aos.d.ts          # AOS animation library types
 ```
