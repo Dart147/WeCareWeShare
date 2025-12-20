@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # VScode settings
 .vscode/
+
+# Astro example files
+Welcome.astro
