@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import CoverImg from '../../assets/news/news6/season5.jpg';
+
+export { CoverImg };
+
+export const newsMeta = {
+  title: 'WE CARE WE SHARE Season 5 正式開跑！ WE CARE WE SHARE Season 5 is Here!',
+  date: '2025.09.23',
+  category: 'Announcements',
+  excerpt: 'WE CARE WE SHARE Season 5 正式開跑！...',
+  slug: '6-season5-is-here',
+};
+---
+
+<Layout title={`${newsMeta.title} | 童心・同享 We Care We Share`}>
+  <Header />
+  <main class="pt-24 pb-20 min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+      
+      <!-- Back button -->
+      <a 
+        href="/news" 
+        class="inline-flex items-center text-primary hover:text-primary-dark mb-6 transition-colors"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        返回最新消息
+      </a>
+
+      <!-- Article header -->
+      <header class="mb-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full font-medium">
+            {newsMeta.category}
+          </span>
+          <time class="text-gray-500 text-sm">{newsMeta.date}</time>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-gray-800">
+          {newsMeta.title}
+        </h1>
+      </header>
+
+      <!-- Article content -->
+      <article class="bg-white shadow-lg rounded-lg p-8 mb-8">
+        
+        <!-- Hero image -->
+        <div class="mb-8">
+          <Image 
+            src={CoverImg}
+            alt="Group Photo" 
+            class="w-full h-auto rounded-lg object-cover"
+          />
+        </div>
+
+        <!-- Chinese content -->
+        <div class="mb-8 prose prose-lg max-w-none">
+          <p class="text-lg mb-4 text-gray-700">
+            🌟 WE CARE WE SHARE Season 5 正式開跑！🌟
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            從第一季到現在，我們一路走來收穫滿滿，也得到許多幫助與支持 🙏感謝校方與老師們的鼓勵、艷紫荊志工社的協力，以及歷屆參與計畫的同學、助教和助理們❤️
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            這學期的通識課程也迎來了來自各個科系的大哥哥大姊姊們，他們充滿愛心、滿懷熱情，已經迫不及待想要和建功的小朋友們相見歡🎧💬
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            ✨ 如果你也想成為我們的錄音小來賓，快來報名吧！👉 不限年齡、英語程度，只要你願意分享你喜歡的事物和精采生活，我們都期待聽見你的聲音 🎶
+          </p>
+        </div>
+
+        <!-- Divider -->
+        <hr class="mb-8 border-gray-200" />
+
+        <!-- English content -->
+        <div class="prose prose-lg max-w-none">
+          <p class="text-lg mb-4 text-gray-700">
+            🌟 WE CARE WE SHARE Season 5 is here! 🌟
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            From Season 1 until now, our journey has been filled with growth, joy, and incredible support 🙏. We're deeply grateful for the encouragement from the university and teachers, the help from the Azalea Volunteer Club, and the dedication of all students, TAs, and assistants who have been part of this project ❤️.
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            This semester, our General Education course team has brought together passionate students from different majors. These big brothers and sisters are full of love and can't wait to meet the kids from Jian-Gong Elementary School 🎧💬!
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            Want to join us as a special guest on the podcast? No age or English level limits—just bring your stories, your favorites, and your wonderful life experiences, and we'll be excited to hear your voice 🎶
+          </p>
+        </div>
+
+      </article>
+
+      <!-- Share or related posts section (optional) -->
+      <div class="text-center">
+        <a 
+          href="/news"
+          class="inline-flex items-center justify-center px-8 py-3 border-2 border-primary text-primary rounded-full font-semibold hover:bg-primary hover:text-white transition-all"
+        >
+          查看更多消息
+        </a>
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>

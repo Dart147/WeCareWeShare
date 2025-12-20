@@ -7,30 +7,43 @@ import NewsSection from '../components/NewsSection.astro';
 import About from '../components/About.astro';
 import Footer from '../components/Footer.astro';
 
-// Sample news data - later you can fetch this from a CMS or markdown files
-const recentNews = [
-  {
-    title: '【錄音花絮來啦！】🎙️【Recording in Action!】',
-    excerpt: '繼開心的 Meet & Greet 之後，我們的錄音活動正式展開！看看小朋友們認真錄音的可愛模樣...',
-    date: '2025.12.13',
-    slug: 'news-7-recording-in-action',
-    image: '/images/news/recording.jpg',
-  },
-  {
-    title: '【Meet & Greet Highlights】【相見歡花絮】',
-    excerpt: '這學期《Kid Bilingual Podcast》的相見歡活動圓滿落幕！感謝所有參與的小朋友和老師...',
-    date: '2025.12.12',
-    slug: '6-meet-and-greet-highlights',
-    image: '/images/news/meet-greet.jpg',
-  },
-  {
-    title: '🌟 WE CARE WE SHARE Season 5 正式開跑！',
-    excerpt: 'WE CARE WE SHARE Season 5 is Here! 全新一季的雙語播客計畫即將展開...',
-    date: '2025.09.23',
-    slug: 'news-5-season5-is-here',
-    image: '/images/news/season5.jpg',
-  },
-];
+import type { ImageMetadata } from 'astro';
+
+interface NewsMeta {
+  title: string;
+  excerpt: string;
+  date: string;
+  slug: string;
+  category?: string;
+}
+
+type NewsPageModule = {
+  CoverImg?: ImageMetadata;
+  newsMeta?: NewsMeta;
+};
+
+const newsPages = import.meta.glob<NewsPageModule>('./news/*.astro', { eager: true });
+
+const toComparableDate = (date: string): number => {
+  const normalized = date.replace(/\./g, '-');
+  const ms = Date.parse(normalized);
+  return Number.isNaN(ms) ? 0 : ms;
+};
+
+const recentNews = Object.values(newsPages)
+  .map((mod) => {
+    if (!mod.newsMeta) return null;
+    return {
+      title: mod.newsMeta.title,
+      excerpt: mod.newsMeta.excerpt,
+      date: mod.newsMeta.date,
+      slug: mod.newsMeta.slug,
+      image: mod.CoverImg?.src,
+    };
+  })
+  .filter((item): item is NonNullable<typeof item> => item !== null)
+  .sort((a, b) => toComparableDate(b!.date) - toComparableDate(a!.date))
+  .slice(0, 3);
 ---
 
 <Layout title="童心。同享 We Care We Share">

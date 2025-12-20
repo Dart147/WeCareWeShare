@@ -1,4 +1,8 @@
 ---
+import { Image } from "astro:assets";
+
+import logoFooter from "../assets/icon/logo-footer.png";
+import lineIcon from "../assets/icon/line.svg";
 // Footer component
 const currentYear = new Date().getFullYear();
 
@@ -62,7 +66,7 @@ const partners: Partner[] = [
       <!-- Brand -->
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <img src="/images/icon/logo-footer.png" alt="Logo" class="h-14 md:h-16 w-auto object-contain" />
+          <Image src={logoFooter} alt="Logo" class="h-14 md:h-16 w-auto object-contain" />
           <div>
             <div class="font-display font-bold text-lg">童心・同享</div>
             <div class="text-sm text-gray-400">We Care We Share</div>
@@ -107,7 +111,7 @@ const partners: Partner[] = [
                 </svg>
               )}
               {link.icon === 'line' && (
-                <img src="/images/icon/line.svg" alt="" class="w-5 h-5" aria-hidden="true" />
+                <Image src={lineIcon} alt="" class="w-5 h-5" aria-hidden="true" />
               )}
               {link.icon === 'facebook' && (
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

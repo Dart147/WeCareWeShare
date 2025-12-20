@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import CoverImg from '../../assets/news/news8/1201_group.jpg';
+import canvaImgupper from '../../assets/news/news8/1201_2.jpg';
+import canvaImglowerleft from '../../assets/news/news8/1201_1.jpg';
+import canvaImglowerright from '../../assets/news/news8/1201_3.jpg';
+
+export { CoverImg };
+
+export const newsMeta = {
+  title: '【錄音花絮來啦！】🎙️【Recording in Action!】',
+  date: '2025.12.13',
+  category: 'Activities',
+  excerpt: '繼開心的 Meet & Greet 破冰活動後，十組清華大學的大哥哥大姊姊和小朋友們正式展開錄音啦！...',
+  slug: '8-recording-in-action',
+};
+---
+
+<Layout title={`${newsMeta.title} | 童心・同享 We Care We Share`}>
+  <Header />
+  <main class="pt-24 pb-20 min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+      
+      <!-- Back button -->
+      <a 
+        href="/news" 
+        class="inline-flex items-center text-primary hover:text-primary-dark mb-6 transition-colors"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        返回最新消息
+      </a>
+
+      <!-- Article header -->
+      <header class="mb-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full font-medium">
+            {newsMeta.category}
+          </span>
+          <time class="text-gray-500 text-sm">{newsMeta.date}</time>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-gray-800">
+          {newsMeta.title}
+        </h1>
+      </header>
+
+      <!-- Article content -->
+      <article class="bg-white shadow-lg rounded-lg p-8 mb-8">
+        
+        <!-- Hero image -->
+        <div class="mb-8">
+          <Image 
+            src={CoverImg}
+            alt="Group Photo" 
+            class="w-full h-auto rounded-lg object-cover"
+          />
+        </div>
+
+        <!-- Chinese content -->
+        <div class="mb-8 prose prose-lg max-w-none">
+          <p class="text-lg mb-4 text-gray-700">
+            繼開心的 Meet & Greet 破冰活動後，十組清華大學的大哥哥大姊姊和小朋友們正式展開錄音啦！🎧
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            來自不同科系、不同國籍的同學們絞盡腦汁💡、發揮創意🎨，希望每位小朋友都能玩得開心、聊得愉快、滿載而歸。這次錄音是最終 Podcast 節目的重要基礎，敬請期待即將上架的成品！
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            錄音現場笑聲不斷🤣，小朋友們玩得超投入，兩週後當節目上線時，還能和爸爸媽媽、同學朋友一起再次收聽💕，重溫當時的快樂時光，也開啟更多親子間的英語互動篇章！👨‍👩‍👧‍👦💬
+          </p>
+        </div>
+
+        <!-- Photo grid -->
+        <div class="flex flex-col gap-2 mb-8">
+          
+          <!-- Top row: Full width image -->
+          <div class="w-full">
+            <Image 
+              src={canvaImgupper}
+              alt="Highlight 1" 
+              class="w-full h-auto rounded-lg object-cover"
+            />
+          </div>
+
+          <!-- Bottom row: Two side-by-side images -->
+          <div class="flex flex-col md:flex-row gap-2">
+            <div class="flex-1">
+              <Image 
+                src={canvaImglowerleft} 
+                alt="Highlight 4" 
+                class="w-full h-auto rounded-lg object-cover"
+              />
+            </div>
+            <div class="flex-1">
+              <Image 
+                src={canvaImglowerright} 
+                alt="Highlight 3" 
+                class="w-full h-auto rounded-lg object-cover"
+              />
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Divider -->
+        <hr class="mb-8 border-gray-200" />
+
+        <!-- English content -->
+        <div class="prose prose-lg max-w-none">
+          <p class="text-lg mb-4 text-gray-700">
+            After the fun Meet & Greet sessions, all ten NTHU student teams officially started recording with their little partners! 🎧
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            Students from different majors and nationalities put their heads together💡 and let their creativity shine🎨—hoping to make each session full of joy, laughter, and learning. This recording marks the foundation for their final podcast episodes—stay tuned for the release!📀🌈
+          </p>
+          <p class="text-lg mb-4 text-gray-700">
+            The kids had so much fun on recording day, and when the podcast goes online in a couple of weeks, they'll get to listen again with their parents and friends💕—reliving the laughter and creating new moments of bilingual connection together! 👨‍👩‍👧‍👦💬
+          </p>
+        </div>
+
+      </article>
+
+      <!-- Share or related posts section (optional) -->
+      <div class="text-center">
+        <a 
+          href="/news"
+          class="inline-flex items-center justify-center px-8 py-3 border-2 border-primary text-primary rounded-full font-semibold hover:bg-primary hover:text-white transition-all"
+        >
+          查看更多消息
+        </a>
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>

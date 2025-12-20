@@ -1,16 +1,18 @@
 ---
+import { Image } from "astro:assets";
+import logo from '../assets/icon/logo-header.png';
+
 // Navigation component with mobile menu support
 interface NavItem {
-  label: string;      // English label (for code readability)
-  labelZh: string;    // Chinese label (displayed on site)
+  label: string;
   href: string;
 }
 
 const navItems: NavItem[] = [
-  { label: 'About', labelZh: 'Podcast介紹', href: '/#about' },
-  { label: 'Team', labelZh: '團隊介紹', href: '/team' },
-  { label: 'News', labelZh: '最新消息', href: '/news' },
-  { label: 'Contest', labelZh: '說故事比賽', href: '/storytelling-contest' },
+  { label: 'Podcast', href: '/podcast' },
+  { label: '團隊介紹', href: '/team' },
+  { label: '最新消息', href: '/news' },
+  { label: '說故事比賽', href: '/storytelling-contest' },
 ];
 ---
 
@@ -18,8 +20,8 @@ const navItems: NavItem[] = [
   <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-3 group">
-      <img 
-        src="/images/icon/logo-header.png"
+      <Image 
+        src={logo}
         alt="We Care We Share Logo" 
         class="h-12 w-auto transition-transform group-hover:scale-105"
       />
@@ -33,7 +35,7 @@ const navItems: NavItem[] = [
             href={item.href}
             class="relative py-2 text-gray-700 hover:text-primary transition-colors font-medium group"
           >
-            <span class="block">{item.labelZh}</span>
+            <span class="block">{item.label}</span>
             <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
           </a>
         </li>
@@ -62,8 +64,7 @@ const navItems: NavItem[] = [
             href={item.href}
             class="block py-3 px-4 text-gray-700 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors"
           >
-            {item.labelZh}
-            <span class="text-xs text-gray-400 ml-2">{item.label}</span>
+            {item.label}
           </a>
         </li>
       ))}

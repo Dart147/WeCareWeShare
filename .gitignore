@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# VScode settings
+.vscode/
+
+# Astro example files
+Welcome.astro

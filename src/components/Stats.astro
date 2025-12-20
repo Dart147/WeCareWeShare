@@ -1,19 +1,32 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from 'astro';
+//import StatsCircle from '../assets/homepage/circle4.svg';
+
+// Local stats icons
+/**import IconSchool from '../assets/homepage/stats/school.svg';
+import IconSeason from '../assets/homepage/stats/seanson.svg';
+import IconEpisode from '../assets/homepage/stats/episode.svg';
+import IconRecord from '../assets/homepage/stats/record.svg';
+import IconKids from '../assets/homepage/stats/kids.svg';
+import IconClass from '../assets/homepage/stats/class.svg';
+import IconSpotify from '../assets/homepage/stats/spotifyclick.svg';**/
 // Stats counter component with icons - matching original WordPress design
 interface Stat {
   value: number;
   label: string;
   suffix?: string;
-  icon: string;
+  //icon: ImageMetadata;
 }
 
 const stats: Stat[] = [
-  { value: 6, label: '合作國小', suffix: '間', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-1.svg' },
-  { value: 5, label: '發行季數', suffix: '季', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-3.svg' },
-  { value: 50, label: '發行集數', suffix: '集', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-3.svg' },
-  { value: 100, label: '進班錄音', suffix: '次', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-1.svg' },
-  { value: 500, label: '小朋友參與錄音', suffix: '位', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-1.svg' },
-  { value: 30, label: '班級參與', suffix: '班', icon: 'https://www.wecareweshare.tw/wp-content/uploads/2024/10/icon2-1.svg' },
+  { value: 6, label: '合作國小', suffix: '間'}, //icon: IconSchool },
+  { value: 5, label: '發行季數', suffix: '季'}, //icon: IconSeason },
+  { value: 50, label: '發行集數', suffix: '集'}, //icon: IconEpisode },
+  { value: 100, label: '進班錄音', suffix: '次'}, //icon: IconRecord },
+  { value: 500, label: '小朋友參與錄音', suffix: '位'}, //icon: IconKids },
+  { value: 30, label: '班級參與', suffix: '班'}, //icon: IconClass },
+  { value: 600, label: 'Spotify 點擊次數', suffix: '次'}, //icon: IconSpotify },
 ];
 ---
 
@@ -25,19 +38,21 @@ const stats: Stat[] = [
           class="flex flex-col items-center animate-fade-in"
           style={`animation-delay: ${index * 0.1}s`}
         >
-          <!-- Icon with spinning circle decoration -->
+          <!-- Icon with spinning circle decoration 
           <div class="relative w-24 h-24 flex items-center justify-center mb-4">
-            <img 
-              src="https://www.wecareweshare.tw/wp-content/uploads/2024/10/circle4.svg" 
+            <Image
+              src={StatsCircle}
               class="absolute inset-0 w-full h-full animate-spin-slow" 
               alt=""
             />
-            <img 
-              src={stat.icon} 
-              class="w-12 h-12 relative z-10" 
+            <Image
+              src={stat.icon}
+              width={48}
+              height={48}
+              class="w-12 h-12 relative z-10"
               alt={stat.label}
             />
-          </div>
+          </div> -->
           
           <!-- Counter value -->
           <h3 class="text-3xl font-bold text-primary">
